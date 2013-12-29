@@ -1,0 +1,23 @@
+{
+    "name": "djordje/laravel-media-library",
+    "description": "",
+    "authors": [
+        {
+            "name": "Djordje Kovacevic",
+            "email": "djordje.bigjoe@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Djordje\\LaravelMediaLibrary\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
