@@ -16,7 +16,7 @@ class MediaFileObserver
 	 */
 	public function creating(MediaFile $model)
 	{
-		if (!($model->file instanceof UploadedFile))
+		if ( ! ($model->file instanceof UploadedFile))
 		{
 			throw new UploadException;
 		}

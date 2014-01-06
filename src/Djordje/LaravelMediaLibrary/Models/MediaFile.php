@@ -1,9 +1,6 @@
 <?php namespace Djordje\LaravelMediaLibrary\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Event;
-use Symfony\Component\HttpFoundation\File\Exception\UploadException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Illuminate\Support\Facades\File as FileFacade;
 
