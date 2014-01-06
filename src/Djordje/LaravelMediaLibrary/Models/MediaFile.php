@@ -71,7 +71,7 @@ class MediaFile extends Model {
 	/**
 	 * Move uploaded file and setup path, filename and public_url properties.
 	 */
-	protected function moveUploadedFile()
+	public function moveUploadedFile()
 	{
 		if ( ! isset($this->file))
 		{
@@ -93,7 +93,7 @@ class MediaFile extends Model {
 	 *
 	 * @return mixed
 	 */
-	protected function removeFile()
+	public function removeFile()
 	{
 		if ($this->exists)
 		{
@@ -104,63 +104,9 @@ class MediaFile extends Model {
 	/**
 	 * Unset temp file property.
 	 */
-	protected function unsetFile()
+	public function unsetFile()
 	{
 		unset($this->file);
-	}
-
-	/**
-	 * Register model events.
-	 */
-	protected static function boot() {
-		parent::boot();
-
-		// Move uploaded file and unset file property.
-		static::creating(function($mediaFile)
-		{
-			if ( ! ($mediaFile->file instanceof UploadedFile))
-			{
-				throw new UploadException;
-			}
-
-			$mediaFile->moveUploadedFile();
-
-			$mediaFile->unsetFile();
-		});
-
-		// If updating file remove old, upload new and unset file property.
-		static::updating(function($mediaFile)
-		{
-			if ($mediaFile->file instanceof UploadedFile)
-			{
-				$mediaFile->removeFile();
-				$mediaFile->moveUploadedFile();
-			}
-
-			$mediaFile->unsetFile();
-		});
-
-		// Remove file too.
-		static::deleting(function($mediaFile)
-		{
-			$mediaFile->removeFile();
-		});
-
-		// Fire events and pass object instance to observers.
-		static::created(function($mediaFile)
-		{
-			Event::fire('media_file.created', array($mediaFile));
-		});
-
-		static::updated(function($mediaFile)
-		{
-			Event::fire('media_file.updated', array($mediaFile));
-		});
-
-		static::deleted(function($mediaFile)
-		{
-			Event::fire('media_file.deleted', array($mediaFile));
-		});
 	}
 
 }

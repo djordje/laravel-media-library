@@ -5,11 +5,18 @@ use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class MediaFileObserver {
+class MediaFileObserver
+{
 
+	/**
+	 * Move uploaded file and unset file property.
+	 *
+	 * @param MediaFile $model
+	 * @throws \Symfony\Component\HttpFoundation\File\Exception\UploadException
+	 */
 	public function creating(MediaFile $model)
 	{
-		if ( ! ($model->file instanceof UploadedFile))
+		if (!($model->file instanceof UploadedFile))
 		{
 			throw new UploadException;
 		}
@@ -18,6 +25,11 @@ class MediaFileObserver {
 		$model->unsetFile();
 	}
 
+	/**
+	 * If updating file remove old, upload new and unset file property.
+	 *
+	 * @param MediaFile $model
+	 */
 	public function updating(MediaFile $model)
 	{
 		if ($model->file instanceof UploadedFile)
@@ -29,6 +41,11 @@ class MediaFileObserver {
 		$model->unsetFile();
 	}
 
+	/**
+	 * Remove file too.
+	 *
+	 * @param MediaFile $model
+	 */
 	public function deleting(MediaFile $model)
 	{
 		$model->removeFile();

@@ -1,5 +1,7 @@
 <?php namespace Djordje\LaravelMediaLibrary;
 
+use Djordje\LaravelMediaLibrary\Models\MediaFile;
+use Djordje\LaravelMediaLibrary\Observers\MediaFileObserver;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider {
@@ -19,6 +21,7 @@ class ServiceProvider extends IlluminateServiceProvider {
 	public function boot()
 	{
 		$this->package('djordje/laravel-media-library');
+        MediaFile::observe(new MediaFileObserver());
 	}
 
 	/**

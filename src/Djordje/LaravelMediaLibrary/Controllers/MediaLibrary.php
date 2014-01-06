@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Input;
 use Djordje\LaravelMediaLibrary\Models\MediaFile;
 
-
 /**
  * Application instance
  */
